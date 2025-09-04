@@ -4,7 +4,7 @@ services:
   runtime: node
   repo: https://github.com/indexy-xyz/webhook-discord-bot
   branch: main
-  plan: starter
+  plan: free
   envVars:
   - key: RENDER_WEBHOOK_SECRET
     sync: false
