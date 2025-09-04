@@ -5,13 +5,5 @@ services:
   repo: https://github.com/indexy-xyz/webhook-discord-bot
   branch: main
   plan: free
-  envVars:
-  - key: RENDER_WEBHOOK_SECRET
-    sync: false
-  - key: RENDER_API_KEY
-    sync: false
-  - key: DISCORD_TOKEN
-    sync: false
-  region: oregon
   buildCommand: pnpm install && pnpm run build
   startCommand: pnpm run start
