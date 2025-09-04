@@ -26,5 +26,4 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-export const server = app.listen(port, () => console.log(`App listening on port ${por}!`));
-t
+export const server = app.listen(port, () => console.log(`App listening on port ${port}!`));
