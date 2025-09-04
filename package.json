@@ -2,16 +2,16 @@
   "name": "webhook-discord-bot",
   "version": "1.0.0",
   "description": "Render Webhook Receiver Example",
-  "main": "app.ts",
+  "main": "src/server.ts",
   "repository": "https://github.com/render-examples/webhook-discord-bot",
   "author": "Render Developers",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "pnpm exec tsc",
-    "start": "node dist/app.js",
-    "dev": "tsnd --respawn app.ts",
-    "typecheck": "tsc --noEmit --pretty"
+  "build": "pnpm exec tsc",
+  "start": "node dist/src/server.js",
+  "dev": "tsnd --respawn src/server.ts",
+  "typecheck": "tsc --noEmit --pretty"
   },
   "keywords": [],
   "dependencies": {
