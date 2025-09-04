@@ -3,8 +3,13 @@ import { WebhookVerificationError } from "standardwebhooks";
 import { validateWebhook } from "./webhook";
 import { handleWebhook } from "./handleWebhook";
 
+
 const app = express();
 const port = process.env.PORT || 3001;
+
+app.get('/', (req: Request, res: Response) => {
+    res.status(200).send('Webhook Discord Bot is running!');
+});
 
 app.post("/webhook", express.raw({ type: 'application/json' }), (req: Request, res: Response, next: NextFunction) => {
     try {
