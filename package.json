@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
   "build": "pnpm exec tsc",
-  "start": "node dist/src/server.js",
+  "start": "node dist/server.js",
   "dev": "tsnd --respawn src/server.ts",
   "typecheck": "tsc --noEmit --pretty"
   },
