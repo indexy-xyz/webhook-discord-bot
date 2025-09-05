@@ -44,3 +44,25 @@ export async function sendServerFailedMessage(service: RenderService, failureRea
         body: JSON.stringify(payload)
     });
 }
+
+export async function sendBuildCompletedMessage(service: RenderService) {
+    const payload = {
+        username: "Render Webhook Bot",
+        embeds: [
+            {
+                title: `${service.name} Build Completed` ,
+                description: "Build has completed successfully.",
+                color: 0x57F287,
+                url: service.dashboardUrl,
+            }
+        ]
+    };
+
+    await fetch(discordWebhookUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    });
+}

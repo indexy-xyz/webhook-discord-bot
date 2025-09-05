@@ -4,6 +4,6 @@ services:
   runtime: node
   repo: https://github.com/indexy-xyz/webhook-discord-bot
   branch: main
-  plan: free
+  plan: starter
   buildCommand: pnpm install && pnpm run build
   startCommand: pnpm run start
