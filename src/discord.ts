@@ -66,3 +66,25 @@ export async function sendBuildCompletedMessage(service: RenderService) {
         body: JSON.stringify(payload)
     });
 }
+
+export async function sendServerUnhealthyMessage(service: RenderService, unhealthyReason: any) {
+    const payload = {
+        username: "Render Webhook Bot",
+        embeds: [
+            {
+                title: `${service.name} Unhealthy` ,
+                description: `Server is unhealthy: ${unhealthyReason}`,
+                color: 0xFAA61A,
+                url: service.dashboardUrl,
+            }
+        ]
+    };
+
+    await fetch(discordWebhookUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    });
+}

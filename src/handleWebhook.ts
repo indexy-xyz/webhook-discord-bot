@@ -1,9 +1,10 @@
 import { WebhookPayload } from "./render";
 import { fetchServiceInfo, fetchEventInfo } from "./renderApi";
-import { sendServerFailedMessage, sendBuildCompletedMessage } from "./discord";
+import { sendServerFailedMessage, sendBuildCompletedMessage, sendServerUnhealthyMessage } from "./discord";
 
 export async function handleWebhook(payload: WebhookPayload) {
     try {
+        console.log(`received webhook of type ${payload.type} for service ${payload.data.serviceId}, ${JSON.stringify(payload)}`);
         switch (payload.type) {
             case "server_failed": {
                 const service = await fetchServiceInfo(payload);
@@ -16,6 +17,13 @@ export async function handleWebhook(payload: WebhookPayload) {
                 const service = await fetchServiceInfo(payload);
                 console.log(`sending build completed message for ${service.name}`);
                 await sendBuildCompletedMessage(service);
+                return;
+            }
+            case "server_unhealthy": {
+                const service = await fetchServiceInfo(payload);
+                const unhealthyReason = payload.data || "Unknown reason";
+                console.log(`sending server unhealthy message for ${service.name}`);
+                await sendServerUnhealthyMessage(service, unhealthyReason);
                 return;
             }
             default:
