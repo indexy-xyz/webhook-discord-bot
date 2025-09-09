@@ -88,3 +88,28 @@ export async function sendServerUnhealthyMessage(service: RenderService, unhealt
         body: JSON.stringify(payload)
     });
 }
+
+export async function sendCronJobRunEndedMessage(service: RenderService, event: any) {
+    const status = event.details?.status;
+    if (status !== "successful") {
+        const cronJobRunId = event.details?.cronJobRunId || "unknown";
+        const payloadDiscord = {
+            username: "Render Webhook Bot",
+            embeds: [
+                {
+                    title: `${service.name} Cron Job Run Ended` ,
+                    description: `Cron job run ${cronJobRunId} ended with status: ${status}`,
+                    color: 0xFF5C88,
+                    url: service.dashboardUrl,
+                }
+            ]
+        };
+        await fetch(discordWebhookUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payloadDiscord)
+        });
+    }
+}
