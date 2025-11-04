@@ -1,6 +1,6 @@
 import { WebhookPayload } from "./render";
 import { fetchServiceInfo, fetchEventInfo } from "./renderApi";
-import { sendServerFailedMessage, sendBuildCompletedMessage, sendServerUnhealthyMessage, sendCronJobRunEndedMessage } from "./discord";
+import { sendServerFailedMessage, sendBuildCompletedMessage, sendCronJobRunEndedMessage } from "./discord";
 
 export async function handleWebhook(payload: WebhookPayload) {
     try {
@@ -16,13 +16,6 @@ export async function handleWebhook(payload: WebhookPayload) {
             case "build_ended": {
                 console.log(`sending build completed message for ${service.name}`);
                 await sendBuildCompletedMessage(service);
-                return;
-            }
-            case "server_unhealthy": {
-                console.log(`server unhealthy event for ${service.name}, event: ${JSON.stringify(event)}`);
-                const unhealthyReason = event.details?.reason || "Unknown reason";
-                console.log(`sending server unhealthy message for ${service.name}`);
-                await sendServerUnhealthyMessage(service, unhealthyReason);
                 return;
             }
             case "cron_job_run_ended": {
